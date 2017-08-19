@@ -229,6 +229,7 @@
                     var method = {
                         method: data.method
                     };
+                    $("#errorMessage").html("");
                     $("#resultsDisplay").html("Your ideal payment method is " + data.method +
                         ".\nYour debt will be payed off in " + Math.ceil(data.N) + " months!");
                     $("#resultsModal").modal('show');
