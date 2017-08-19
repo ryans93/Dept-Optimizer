@@ -282,7 +282,8 @@
         var id = $(this).attr("data-id");
         var name = { name: id };
         $.post(currentURL + '/api/delete/', name, function (res) {
-            updateTable(res);
+            location.reload(); 
+            //updateTable(res);
         })
     });
     var editId;
@@ -310,7 +311,8 @@
         };
         var currentURL = window.location.origin;
         $.post(currentURL + '/api/editLoan', newLoan, function (res) {
-            updateTable(res);
+            location.reload(); 
+            //updateTable(res);
         });
         $("#myEditModal").modal('hide');
         $("#nameEdit").val("");
