@@ -48,7 +48,7 @@
                                         <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
-                                <div id="loanDataContainer">
+                                <div id="divContainer">
                                 </div>
                             </table>
                         </div>
@@ -275,7 +275,7 @@
             }
             var html = loanTemplate(newRow);
 
-            $("#loanDataContainer").append(html);
+            $("#loanTable").append(html);
 
         }
     }
@@ -284,8 +284,8 @@
         var id = $(this).attr("data-id");
         var name = { name: id };
         $.post(currentURL + '/api/delete/', name, function (res) {
-            $("#loanDataContainer").html("");
-            updateTable(res);
+            location.reload(); 
+            //updateTable(res);
         })
     });
     var editId;
@@ -313,8 +313,8 @@
         };
         var currentURL = window.location.origin;
         $.post(currentURL + '/api/editLoan', newLoan, function (res) {
-            $("#loanDataContainer").html(""); 
-            updateTable(res);
+            location.reload(); 
+            //updateTable(res);
         });
         $("#myEditModal").modal('hide');
         $("#nameEdit").val("");
