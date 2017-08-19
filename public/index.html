@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="/style/style_login.css">
+    
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-md-4 col-md-offset-4">
+                <h1 class="text-center login-title">Sign in to continue to Debt Payment Optimizer</h1>
+                <div class="account-wall">
+                    <img class="profile-img" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
+                        alt="">
+                  
+                        <input id="username" type="text" class="form-control" placeholder="Email" required autofocus>
+                        <input id="password" type="password" class="form-control" placeholder="Password" required>
+                        <button class="btn btn-lg btn-primary btn-block" id="loginUser">
+                    Sign in</button><div id="loginMsg"></div>
+                        <label id="member" class="checkbox pull-left"><input id="member-me" type="checkbox" value="remember-me">Remember me</label>
+                        <a href="#" class="pull-right need-help">Need help? </a><span class="clearfix"></span>
+                  
+                </div>
+                <a href="/newUser" class="text-center new-account">Create an account</a>
+            </div>
+        </div>
+</body>
+
+<script type="text/javascript">
+    $("#loginUser").on("click", function () {
+        var User = {
+            username: $('#username').val().trim().toLowerCase(),
+            password: $("#password").val().trim()
+        };
+        $("#password").val("");
+        var currentURL = window.location.origin;
+        $.post("/login", User, function (res) {
+            if(res){
+            window.location.replace(currentURL+"/home");
+            }
+        })
+    });
+</script>
+
+</html>

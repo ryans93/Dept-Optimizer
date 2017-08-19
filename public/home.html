@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/style/style_login.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.min.js"></script>
+</head>
+
+<body style="background-image: url(/style/money.jpg); background-size: 100% 100%; background-repeat: no-repeat; height: 100vh;">
+
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-xs-12">
+                <h1 class="text-center" style="color:orange">Payment Method Optimizer</h1>
+                <h2 class="text-center" style="color:orange">Snowball vs Avalanche</h2>
+                
+            </div>
+        </div>
+
+        <div class="row">
+
+        </div>
+
+        <form>
+            <div class="well">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12  table-responsive">
+                            <table class="table table-striped custab" id="loanTable">
+                                <thead>
+                                    <tr>
+                                        <th>Loan Name</th>
+                                        <th>Loan Type</th>
+                                        <th>Balance</th>
+                                        <th>Interest Rate</th>
+                                        <th>Minimum Payment</th>
+                                        <th class="text-center">Action</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add New Loan</button>
+                        </div>
+                        <div class="col-xs-12 col-sm-10 cal">
+                            <form>
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <a class="btn btn-primary pull-right" href="https://www.thepennyhoarder.com/smart-money/debt-snowball-method/" target="_blank">More info</a>
+                                        <button type="button" class="btn btn-primary pull-right" id="calc1btn" style="margin-right:5px;">Calculate</button>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">$</span>
+                                            <input type="text" class="form-control" placeholder="How much can you pay?" id="maxInput">
+                                            <span class="input-group-addon">.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+
+                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Add a new loan</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form>
+                                        <div class="form-group">
+                                            <label for="name">Name</label>
+                                            <input name="name" type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Give a unique name to your loan.">
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="loan_type">Loan Type</label>
+                                            <select name="loan_type" class="form-control" id="loan_type">
+                                                    <option>Card</option>
+                                                    <option>Mortgage</option>
+                                                    <option>Person Loan</option>
+                                                    <option>Car Payment</option>
+                                                    <option>School Loan</option>
+                                                </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="balance">balance</label>
+                                            <input name="balance" type="number" class="form-control" id="balance" placeholder="$ 0.00">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="interest_rate">Interest</label>
+                                            <input name="interest_rate" type="number" class="form-control" id="interest_rate" aria-describedby="emailHelp" placeholder="0.00%">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="minimum_Payment">Minimum Payment</label>
+                                            <input name="minimum_Payment" type="text" class="form-control" id="minimum_Payment" aria-describedby="emailHelp" placeholder="$ 0.00">
+                                        </div>
+
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button id="newLoan" type="submit" class="btn btn-primary">Add +</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="myEditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Edit a loan</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form>
+                                        <div class="form-group">
+                                            <label for="name">Name</label>
+                                            <input name="name" type="text" class="form-control" id="nameEdit" aria-describedby="emailHelp" placeholder="Give a unique name to your loan.">
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="loan_type">Loan Type</label>
+                                            <select name="loan_type" class="form-control" id="loan_typeEdit">
+                                                        <option>Card</option>
+                                                        <option>Mortgage</option>
+                                                        <option>Person Loan</option>
+                                                        <option>Car Payment</option>
+                                                        <option>School Loan</option>
+                                                    </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="balance">balance</label>
+                                            <input name="balance" type="number" class="form-control" id="balanceEdit" placeholder="$ 0.00">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="interest_rate">Interest</label>
+                                            <input name="interest_rate" type="number" class="form-control" id="interest_rateEdit" aria-describedby="emailHelp" placeholder="0.00%">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="minimum_Payment">Minimum Payment</label>
+                                            <input name="minimum_Payment" type="text" class="form-control" id="minimum_PaymentEdit" aria-describedby="emailHelp" placeholder="$ 0.00">
+                                        </div>
+
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button id="editLoan" type="submit" class="btn btn-primary">Edit </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="resultsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title" id="exampleModalLabel">Results</h1>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                </div>
+                                <div class="modal-body">
+                                    <h3 id="resultsDisplay"></h3>
+                                    <p id=errorMessage></p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+
+</body>
+
+<script type="text/javascript">
+    var currentURL = window.location.origin;
+    $("#newLoan").on("click", function () {
+        var newLoan = {
+            name: $("#name").val().trim().toUpperCase(),
+            loan_type: $("#loan_type").val(),
+            balance: $("#balance").val(),
+            interest_rate: $("#interest_rate").val(),
+            minimum_Payment: $("#minimum_Payment").val()
+        };
+        var currentURL = window.location.origin;
+        $.post(currentURL + '/api/newLoan', newLoan, function (res) {
+            updateTable(res);
+        });
+        $("#myModal").modal('hide');
+        $("#name").val("");
+        $("#loan_type").val("");
+        $("#balance").val("");
+        $("#interest_rate").val("");
+        $("#minimum_Payment").val("");
+    });
+
+    $("#calc1btn").on("click", function () {
+        var max = $("#maxInput").val();
+        if ($("#maxInput").val() != "") {
+            $.get("/api/calc1/" + max, function (data) {
+                console.log(data);
+                if (data.N === 0) {
+                    $("#resultsDisplay").html("Error!");
+                    $("#errorMessage").html(data.message);
+                    $("#resultsModal").modal('show');
+                    var method = {
+                        method: data.method
+                    };
+                } else {
+                    $("#resultsDisplay").html("Your ideal payment method is " + data.method +
+                        ".\nYour debt will be payed off in " + Math.ceil(data.N) + " months!");
+                    $("#resultsModal").modal('show');
+                    $.post("/api/updateMethod", method, function (res) {
+                        console.log(res);
+                    });
+                }
+            });
+        } else {
+            $("#maxInput").attr("placeholder", "You must enter a valid payment to continue.");
+        }
+    });
+
+</script>
+
+<!--Script for handlebars template-->
+
+<script>
+    var loanTemplate;
+
+    $(document).ready(function () {
+        var source = $("#loan-template").html();
+        loanTemplate = Handlebars.compile(source);
+        getinitialData();
+    })
+
+    function getinitialData() {
+        $.get(currentURL + '/api/getUser', function (res) {
+            updateTable(res);
+        });
+    }
+
+    function updateTable(res) {
+        var userloanInfo = res;
+        for (var i = 0; i < userloanInfo.length; i++) {
+            var newRow = {
+                name: userloanInfo[i].name,
+                loan_type: userloanInfo[i].loan_type,
+                balance: userloanInfo[i].balance,
+                interest_rate: userloanInfo[i].interest_rate,
+                minimum_Payment: userloanInfo[i].minimum_Payment,
+            }
+            var html = loanTemplate(newRow);
+
+            $("#loanTable").append(html);
+
+        }
+    }
+
+    $(document).on("click", ".deletebtn", function () {
+        var id = $(this).attr("data-id");
+        var name = { name: id };
+        $.post(currentURL + '/api/delete/', name, function (res) {
+            updateTable(res);
+        })
+    });
+    var editId;
+
+    $(document).on("click", ".btn-info", function () {
+        editId = $(this).attr("data-id");
+        $.get("/api/loanInfo/" + editId, function (data) {
+            $("#nameEdit").val(data.name);
+            $("#loan_typeEdit").val(data.loan_type);
+            $("#balanceEdit").val(data.balance);
+            $("#interest_rateEdit").val(data.interest_rate);
+            $("#minimum_PaymentEdit").val(data.minimum_Payment);
+            $("#myEditModal").modal('show');
+        });
+    });
+
+    $("#editLoan").on("click", function () {
+        var newLoan = {
+            name: $("#nameEdit").val().trim().toUpperCase(),
+            loan_type: $("#loan_typeEdit").val(),
+            balance: $("#balanceEdit").val(),
+            interest_rate: $("#interest_rateEdit").val(),
+            minimum_Payment: $("#minimum_PaymentEdit").val(),
+            editId: editId
+        };
+        var currentURL = window.location.origin;
+        $.post(currentURL + '/api/editLoan', newLoan, function (res) {
+            updateTable(res);
+        });
+        $("#myEditModal").modal('hide');
+        $("#nameEdit").val("");
+        $("#loan_typeEdit").val("");
+        $("#balanceEdit").val("");
+        $("#interest_rateEdit").val("");
+        $("#minimum_PaymentEdit").val("");
+    });
+
+</script>
+
+<script id="loan-template" type="text/x-handlebars-template">
+    <tr>
+        <td>{{name}}</td>
+        <td>{{loan_type}}</td>
+        <td>{{balance}}</td>
+        <td>{{interest_rate}}</td>
+        <td>{{minimum_Payment}}</td>
+        <td class="text-center"><button type="button" data-id='{{name}}' class=' btn btn-info btn-xs'><span class="glyphicon glyphicon-edit"></span> Edit</button>
+            <button type="submit" data-id='{{name}}' class="btn btn-danger deletebtn btn-xs"><span class="glyphicon glyphicon-remove"></span>Del</button></td>
+    </tr>
+
+</script>
+
+</html>
