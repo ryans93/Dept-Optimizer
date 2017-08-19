@@ -100,6 +100,7 @@ module.exports = function (app) {
         db.User.update(method, {
             where: { user_id: req.user.user_id }
         }).then(function (data) {
+            console.log(data);
             res.json(data);
         });
     });
