@@ -225,10 +225,10 @@
                     $("#resultsDisplay").html("Error!");
                     $("#errorMessage").html(data.message);
                     $("#resultsModal").modal('show');
+                } else {
                     var method = {
                         method: data.method
                     };
-                } else {
                     $("#resultsDisplay").html("Your ideal payment method is " + data.method +
                         ".\nYour debt will be payed off in " + Math.ceil(data.N) + " months!");
                     $("#resultsModal").modal('show');
