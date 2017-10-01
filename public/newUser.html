@@ -38,7 +38,7 @@
 
 
 <script type="text/javascript">
-    $("#newUser").on("click", function () {
+    $("#newUser").on("click", function () { //Go button handler
         var newUser = {
 
             firstName: $("#firstName").val().trim().toLowerCase(),
@@ -50,9 +50,9 @@
         var currentURL = window.location.origin;
 
 
-        $.post(currentURL + '/createAccount', newUser, function (data) {
+        $.post(currentURL + '/createAccount', newUser, function (data) { //post newUser to database
             if(data)
-            window.location.replace(window.location.origin.replace("newUser",""));
+            window.location.replace(window.location.origin.replace("newUser","")); 
         })
 
     });
