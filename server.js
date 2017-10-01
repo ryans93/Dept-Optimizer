@@ -5,12 +5,12 @@ var Strategy = require('passport-local').Strategy;
 
 
 var app = express();
-var PORT = process.env.PORT || 8080;
+var PORT = process.env.PORT || 8080; //port initialized
 
 var db = require("./models");
 
 
-passport.use(new Strategy(
+passport.use(new Strategy( //passport authentication
   function(username, password, cb) {
     db.User.findOne({where:{user_id:username}}).then(function(user) {
       if (!user) { return cb(null, false); }
@@ -46,11 +46,11 @@ app.use(express.static("./public"));
 app.use(passport.initialize());
 app.use(passport.session());
 
-
+//Routes
 require("./routes/html-routes.js")(app,passport);
 require("./routes/api-routes.js")(app);
 
-db.sequelize.sync().then(function() {
+db.sequelize.sync().then(function() { //server started
     app.listen(PORT, function() {
       console.log("App listening on PORT " + PORT);
     });
