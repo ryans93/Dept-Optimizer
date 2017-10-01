@@ -5,14 +5,14 @@ var calc1 = require('../logic.js');
 
 
 module.exports = function (app) {
-    app.get('/api/calc1/:max', (req, res) => {
+    app.get('/api/calc1/:max', (req, res) => { //get calling logic.js
         var max = req.params.max;
-        calc1(req.user.user_id, max).then(result => {
+        calc1(req.user.user_id, max).then(result => { 
             res.send(result);
         });
     })
 
-    app.post("/api/newLoan", function (req, res) {
+    app.post("/api/newLoan", function (req, res) { //post for new loans
         db.Loan.create({
             name: req.body.name,
             loan_type: req.body.loan_type,
@@ -29,7 +29,7 @@ module.exports = function (app) {
         });
     })
 
-    app.post("/api/editLoan", function (req, res) {
+    app.post("/api/editLoan", function (req, res) { //post for editing loans
         var updateLoan = {
             name: req.body.name,
             loan_type: req.body.loan_type,
@@ -48,7 +48,7 @@ module.exports = function (app) {
         });
     })
 
-    app.get("/api/getUser", function (req, res) {
+    app.get("/api/getUser", function (req, res) { //get for returning a user
         db.Loan.findAll({
             where: { UserUserId: req.user.user_id }
         }).then(function (data) {
@@ -56,7 +56,7 @@ module.exports = function (app) {
         });
     });
 
-    app.post("/createAccount", function (req, res) {
+    app.post("/createAccount", function (req, res) { //post for creating a new account
         var newUser = {
             user_id: req.body.Email,
             user_password: req.body.Password,
@@ -69,7 +69,7 @@ module.exports = function (app) {
         });
     });
 
-    app.post("/api/delete", function (req, res) {
+    app.post("/api/delete", function (req, res) {   //post for deleting loans
         var name = req.body.name;
         console.log("in api call now");
         console.log(name);
@@ -82,7 +82,7 @@ module.exports = function (app) {
         });
     });
 
-    app.get('/api/loanInfo/:name', (req, res) => {
+    app.get('/api/loanInfo/:name', (req, res) => {  //get for returning specif loan by name
         var name = req.params.name;
         console.log(name);
         db.Loan.findOne({
@@ -93,7 +93,7 @@ module.exports = function (app) {
         });
     })
 
-    app.post("/api/updateMethod", function (req, res) {
+    app.post("/api/updateMethod", function (req, res) { //post for updating user's optimum payment method
         var method = {
             user_optimum_payment_method:req.body.method,
         }
