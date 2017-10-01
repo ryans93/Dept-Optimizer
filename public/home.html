@@ -196,7 +196,7 @@
 
 <script type="text/javascript">
     var currentURL = window.location.origin;
-    $("#newLoan").on("click", function () {
+    $("#newLoan").on("click", function () { //new loan button handler
         var newLoan = {
             name: $("#name").val().trim().toUpperCase(),
             loan_type: $("#loan_type").val(),
@@ -205,8 +205,8 @@
             minimum_Payment: $("#minimum_Payment").val()
         };
         var currentURL = window.location.origin;
-        $.post(currentURL + '/api/newLoan', newLoan, function (res) {
-            updateTable(res);
+        $.post(currentURL + '/api/newLoan', newLoan, function (res) { //post new loan
+            updateTable(res);   //table display updated
         });
         $("#myModal").modal('hide');
         $("#name").val("");
@@ -216,16 +216,16 @@
         $("#minimum_Payment").val("");
     });
 
-    $("#calc1btn").on("click", function () {
-        var max = $("#maxInput").val();
+    $("#calc1btn").on("click", function () { //Calculate button event handler
+        var max = $("#maxInput").val(); //grab max payment value entered by user
         if ($("#maxInput").val() != "") {
-            $.get("/api/calc1/" + max, function (data) {
+            $.get("/api/calc1/" + max, function (data) {    //get calc1
                 console.log(data);
-                if (data.N === 0) {
+                if (data.N === 0) {     //error display
                     $("#resultsDisplay").html("Error!");
                     $("#errorMessage").html(data.message);
                     $("#resultsModal").modal('show');
-                } else {
+                } else {    //result display
                     var method = {
                         method: data.method
                     };
@@ -257,12 +257,12 @@
     })
 
     function getinitialData() {
-        $.get(currentURL + '/api/getUser', function (res) {
+        $.get(currentURL + '/api/getUser', function (res) {     //initialize table display at login
             updateTable(res);
         });
     }
 
-    function updateTable(res) {
+    function updateTable(res) { //method dynamically updating table dsiplay
         var userloanInfo = res;
         var tableHead="<thead><tr><th>Loan Name</th><th>Loan Type</th><th>Balance</th><th>Interest Rate</th><th>Minimum Payment</th><th class='text-center'>Action</th></tr></thead>";
         $("#loanTable").html(tableHead);
@@ -274,23 +274,22 @@
                 interest_rate: userloanInfo[i].interest_rate,
                 minimum_Payment: userloanInfo[i].minimum_Payment,
             }
-            var html = loanTemplate(newRow);
-
-            $("#loanTable").append(html);
+            var html = loanTemplate(newRow); //handlebars template call 
+            $("#loanTable").append(html); 
 
         }
     }
 
-    $(document).on("click", ".deletebtn", function () {
+    $(document).on("click", ".deletebtn", function () { //delete button handler
         var id = $(this).attr("data-id");
         var name = { name: id };
-        $.post(currentURL + '/api/delete/', name, function (res) {
+        $.post(currentURL + '/api/delete/', name, function (res) { //post to database to delete
             updateTable(res);
         })
     });
     var editId;
 
-    $(document).on("click", ".btn-info", function () {
+    $(document).on("click", ".btn-info", function () {  //edit loan button handler
         editId = $(this).attr("data-id");
         $.get("/api/loanInfo/" + editId, function (data) {
             $("#nameEdit").val(data.name);
@@ -302,7 +301,7 @@
         });
     });
 
-    $("#editLoan").on("click", function () {
+    $("#editLoan").on("click", function () { //edit loan (modal)
         var newLoan = {
             name: $("#nameEdit").val().trim().toUpperCase(),
             loan_type: $("#loan_typeEdit").val(),
@@ -325,7 +324,7 @@
 
 </script>
 
-<script id="loan-template" type="text/x-handlebars-template">
+<script id="loan-template" type="text/x-handlebars-template"> //handlebars template for loans
     <tr>
         <td>{{name}}</td>
         <td>{{loan_type}}</td>
