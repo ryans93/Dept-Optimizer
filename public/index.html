@@ -38,14 +38,14 @@
 </body>
 
 <script type="text/javascript">
-    $("#loginUser").on("click", function () {
+    $("#loginUser").on("click", function () {   //login button handler
         var User = {
             username: $('#username').val().trim().toLowerCase(),
             password: $("#password").val().trim()
         };
         $("#password").val("");
         var currentURL = window.location.origin;
-        $.post("/login", User, function (res) {
+        $.post("/login", User, function (res) { //post for passport authentication
             if(res){
             window.location.replace(currentURL+"/home");
             }
