@@ -3,15 +3,15 @@ var db = require("../models");
 
 module.exports = function(app,passport) {
 
-    app.get("/", function(req, res) {
+    app.get("/", function(req, res) { //login page
         res.sendFile(path.join(__dirname, "../public/index.html"));
       });
 
-      app.get("/newUser", function(req, res) {
+      app.get("/newUser", function(req, res) { //account sign up page
         res.sendFile(path.join(__dirname, "../public/newUser.html"));
       });
 
-      app.get("/home", function(req, res) {
+      app.get("/home", function(req, res) { //home page
         if(req.user){
         res.sendFile(path.join(__dirname, "../public/home.html"));}
         else
